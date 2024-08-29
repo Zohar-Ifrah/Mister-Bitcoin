@@ -1,0 +1,31 @@
+<section class="contact-edit">
+    <h1>{{ contact?._id ? "Edit" : "Add" }} Contact</h1>
+    <form [formGroup]="form" (ngSubmit)="onSaveContact()">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" id="name" />
+        <ng-container *ngIf="form.controls['name']as nameInput">
+            <p *ngIf="nameInput.touched && form.invalid" class="errors">
+                <span *ngIf="nameInput.errors?.['required']">Name is required!</span>
+                <span *ngIf="nameInput.errors?.['nonEnglishLetters']">Only English letters are allowed!</span>
+                <span *ngIf="nameInput.errors?.['nameTaken']">Name is already taken.</span>
+            </p>
+            <span *ngIf="nameInput.pending && nameInput.touched && nameInput.dirty" >
+                Fetching for data...
+            </span>
+        </ng-container>
+        
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" id="email" />
+        <ng-container *ngIf="form.controls['email']as emailInput">
+            <p *ngIf="emailInput.touched && form.invalid" class="errors">
+                <span *ngIf="emailInput.errors?.['required']">> Email is required </span>
+            </p>
+        </ng-container>
+
+        <label for="phone">Phone</label>
+        <input type="text" formControlName="phone" id="phone" />
+
+        <button>Save</button>
+        <button (click)="onBack($event)">back</button>
+    </form>
+</section>

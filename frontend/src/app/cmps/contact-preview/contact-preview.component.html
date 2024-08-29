@@ -1,0 +1,13 @@
+<section class="contact-preview">
+    <a routerLink="/contact/{{contact._id}}" style="text-decoration: none; color: inherit;">
+        <li>
+            <div class="flex space-between width-full">
+                {{contact.name}}
+                <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">X</button>
+            </div>
+
+            <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+        </li>
+    </a>
+    <a routerLink="edit/{{contact._id}}" class="edit-link">Edit</a>
+</section>

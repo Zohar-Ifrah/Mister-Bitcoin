@@ -1,0 +1,34 @@
+<ng-container *ngIf="trades$ | async as trades" >
+<ngx-charts-bar-vertical
+  [view]="[width, height]"
+  [results]="trades"
+  [xAxis]="true"
+  [yAxis]="true"
+  [legend]="true"
+  [legendTitle]="'Product Sale Report'"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [yAxisLabel]="'Trade Volume (USD)'"
+  [scheme]="'vivid'"
+  [animations]="true"
+  [gradient]="true"
+  [roundDomains]="true"
+  [barPadding]="10"
+  [tooltipDisabled]="false"
+>
+</ngx-charts-bar-vertical>
+
+<ngx-charts-pie-chart
+  [view]="[width, height]"
+  [results]="trades"
+  [labels]="true"
+  [doughnut]="true"
+  [gradient]="true"
+  [scheme]="'vivid'"
+  [explodeSlices]="false"
+  [arcWidth]="0.3"
+  [animations]="true"
+>
+</ngx-charts-pie-chart>
+</ng-container>
+

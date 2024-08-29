@@ -1,0 +1,14 @@
+<section class="contact-details">
+    <section *ngIf="contact$ |async as contact">
+        <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+        <p>Name: <input type="text" [value]="contact.name" readonly>
+        </p>
+
+        <p>Phone: <input type="text" [value]="contact.phone" readonly>
+        </p>
+
+        <p>Email: <input type="text" [value]="contact.email" readonly>
+        </p>
+    </section>
+    <button (click)="onBack()">back</button>
+</section>

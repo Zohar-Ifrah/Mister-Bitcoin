@@ -1,0 +1,43 @@
+// header {
+//     height: 70px;
+//     display: flex;
+//     align-items: center;
+//     background-color: #4caf;
+//     margin-bottom: 30px;
+//     justify-content: space-between;
+
+//     .links {
+//         cursor: pointer;
+//         display: flex;
+//         gap: 10px;
+//         margin-right: 20px;
+//     }
+// }
+header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    background-color: #4caf50;
+    color: whitesmoke;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    padding-inline: 0.5em;
+    justify-content: space-between;
+    h1.logo {
+        // flex-grow: 1;
+        cursor: pointer;
+    }
+
+    nav {
+        a {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            &.active {
+                color: brown;
+                font-weight: bold;
+            }
+        }
+    }
+}
