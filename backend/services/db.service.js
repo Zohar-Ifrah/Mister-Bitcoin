@@ -1,11 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
+require('dotenv').config(); // Load environment variables from .env
 
 // Connection URL
-const url = 'mongodb://localhost:27017'; // "mongodb://localhost:3030"
+const url = process.env.MONGO_URI;
 
 // Database Name
-const dbName = 'contact_db'; 
+const dbName = process.env.DB_NAME; // Use DB_NAME from .env
 
 var dbConn = null;
 
@@ -29,8 +30,14 @@ async function getCollection(collectionName) {
 }
 
 function toObjectId(id) {
-    return new ObjectId(id);
+    try {
+        return new ObjectId(id);
+    } catch (err) {
+        console.error('Invalid ObjectId format:', id, err);
+        throw err;
+    }
 }
+
 
 module.exports = {
     toObjectId,
