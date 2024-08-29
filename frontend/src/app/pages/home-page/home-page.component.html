@@ -1,4 +1,4 @@
-<section class="home-page">
+<section *ngIf="user$ | async as user" class="home-page">
   <h3>Mister-BITCoin</h3>
   <h2> hello {{user.name}}</h2>
   <p>

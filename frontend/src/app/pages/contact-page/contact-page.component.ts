@@ -1,8 +1,9 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { ContactService } from '../../services/contact.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ContactService } from '../../services/async-contact.service';
+// import { ContactService } from '../../services/contact.service';
+// import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Contact } from '../../models/contact.model';
-import { delay, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoaderService } from '../../services/loader.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class ContactPageComponent {
 
   private contactService = inject(ContactService)
   private loaderService = inject(LoaderService)
-  private destroyRef = inject(DestroyRef)
+  // private destroyRef = inject(DestroyRef)
 
   contacts$: Observable<Contact[]> = this.contactService.contacts$
 

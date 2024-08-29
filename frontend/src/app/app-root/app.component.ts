@@ -1,5 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ContactService } from '../services/contact.service';
+import { ContactService } from '../services/async-contact.service';
+// import { ContactService } from '../services/contact.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,11 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  // private contactService = inject(ContactService)
   private contactService = inject(ContactService)
   subscripction!: Subscription
 
   ngOnInit(): void {
-    this.subscripction = this.contactService.loadContacts()
+    // this.subscripction = this.contactService.loadContacts()
+    this.subscripction = this.contactService.getContacts()
       .subscribe({
         error: err => console.log("err", err)
       })
