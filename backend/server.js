@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // Serve static files from 'dist' in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve('dist/my-angular-app')))
+    app.use(express.static(path.join(__dirname, 'public')))
 } else {
     const corsOptions = {
         origin: [
@@ -39,7 +39,7 @@ app.use('/api/user', userRoutes)
 
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve('dist/my-angular-app/index.html'))
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
 const port = process.env.PORT || 3000;
