@@ -5,8 +5,10 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { PageNotFoundComponent } from './cmps/page-not-found/page-not-found.component';
 import { ContactDetailsComponent } from './pages/contact-details/contact-details.component';
 import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit-page.component';
-import { contactResolver } from './services/contact-resolver.service';
+// import { contactResolver } from './services/contact-resolver.service';
+import { contactResolver } from './resolvers/contact.resolver';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -21,7 +23,13 @@ const routes: Routes = [
     ]
   },
   // { path: "contact/edit", component: ContactEditPageComponent },
-  { path: "contact/:id", component: ContactDetailsComponent },
+  {
+    path: "contact/:id",
+    component: ContactDetailsComponent,
+    canActivate: [authGuard],
+    resolve: { contact: contactResolver}
+  },
+
   // {
   //   path: "contact/edit/:id",
   //   component: ContactEditPageComponent,

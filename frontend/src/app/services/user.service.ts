@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,23 @@ import { Observable } from 'rxjs';
 export class UserService {
   private apiUrl = 'http://localhost:3000/api/user'
 
-  constructor(private http: HttpClient) {}
+  user: User = {
+    _id: 'u123',
+    name: 'DefUser',
+    coins: 110,
+    moves: []
+  }
+  constructor(private http: HttpClient) { }
+
+  private _loggedInUser$ = new BehaviorSubject(this.user)
+  public loggedInUser$ = this._loggedInUser$.asObservable()
 
   getUser(id: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
+  }
+
+  getLoggedInUser() {
+    return this._loggedInUser$.value
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { ContactService } from '../../services/async-contact.service'
 // import { ContactService } from '../../services/contact.service'
 import { Contact } from '../../models/contact.model'
-import { filter, Observable, switchMap } from 'rxjs'
+import { filter, map, Observable, switchMap } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -36,6 +36,7 @@ export class ContactEditPageComponent implements OnInit {
     this.route.data
       .pipe(
         filter(data => data['contact']),
+        map(data => data['contact']),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(({ contact }) => {
