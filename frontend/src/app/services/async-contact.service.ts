@@ -10,7 +10,7 @@ import { Filter } from '../models/filter.model';
 })
 export class ContactService {
 
-    private apiUrl = 'http://localhost:3000/api/contact'
+    private apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/contact'
 
     // BehaviorSubject to store and emit the list of contacts
     private _contacts$ = new BehaviorSubject<Contact[]>([])

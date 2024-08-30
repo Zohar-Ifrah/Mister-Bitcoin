@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api/user'
+  private apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/user'
 
   user: User = {
     _id: 'u123',
