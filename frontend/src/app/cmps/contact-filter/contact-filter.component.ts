@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { ContactService } from '../../services/contact.service';
-
+import { ContactService } from '../../services/async-contact.service';
+// import { ContactService } from '../../services/contact.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { Filter } from '../../models/filter.model';

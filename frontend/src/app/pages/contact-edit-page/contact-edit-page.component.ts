@@ -1,5 +1,6 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core'
-import { ContactService } from '../../services/contact.service'
+import { ContactService } from '../../services/async-contact.service'
+// import { ContactService } from '../../services/contact.service'
 import { Contact } from '../../models/contact.model'
 import { filter, Observable, switchMap } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'

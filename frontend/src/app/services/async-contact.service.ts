@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError, combineLatest } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Contact } from '../models/contact.model';
+import { Filter } from '../models/filter.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactService {
 
-    private apiUrl = 'http://localhost:3000/api/contact';  // Update with your API URL
+    private apiUrl = 'http://localhost:3000/api/contact'
 
     // BehaviorSubject to store and emit the list of contacts
-    private _contacts$ = new BehaviorSubject<Contact[]>([]);
-    public contacts$ = this._contacts$.asObservable();
+    private _contacts$ = new BehaviorSubject<Contact[]>([])
+    public contacts$ = this._contacts$.asObservable()
+
+    private _filterBy$ = new BehaviorSubject<Filter>({ term: '' })
+    public filterBy$ = this._filterBy$.asObservable()
 
     constructor(private http: HttpClient) {
         // Initialize contacts by loading them from the backend
@@ -26,9 +30,10 @@ export class ContactService {
             catchError(this.handleError)
         );
     }
-
     public getContacts(): Observable<Contact[]> {
-        return this.contacts$; // Return the observable from BehaviorSubject
+        return combineLatest([this.contacts$, this.filterBy$]).pipe(
+            map(([contacts, filterBy]) => this._filterContacts(contacts, filterBy))
+        );
     }
 
     public getContactById(id: string): Observable<Contact> {
@@ -40,22 +45,26 @@ export class ContactService {
         );
     }
 
-    public addContact(contact: Contact): Observable<Contact> {
+    public saveContact(contact: Contact): Observable<Contact> {
+        return contact._id ? this._updateContact(contact) : this._addContact(contact);
+    }
+
+    private _addContact(contact: Contact): Observable<Contact> {
         return this.http.post<Contact>(this.apiUrl, contact).pipe(
             tap(newContact => {
                 const contacts = this._contacts$.value;
-                this._contacts$.next([...contacts, newContact]); // Update BehaviorSubject
+                this._contacts$.next([...contacts, newContact]);
             }),
             catchError(this.handleError)
         );
     }
 
-    public updateContact(contact: Contact): Observable<Contact> {
+    private _updateContact(contact: Contact): Observable<Contact> {
         return this.http.put<Contact>(`${this.apiUrl}/${contact._id}`, contact).pipe(
             tap(updatedContact => {
                 const contacts = this._contacts$.value;
                 const updatedContacts = contacts.map(c => c._id === updatedContact._id ? updatedContact : c);
-                this._contacts$.next(updatedContacts); // Update BehaviorSubject
+                this._contacts$.next(updatedContacts);
             }),
             catchError(this.handleError)
         );
@@ -70,6 +79,18 @@ export class ContactService {
             }),
             catchError(this.handleError)
         );
+    }
+
+    private _filterContacts(contacts: Contact[], filterBy: Filter): Contact[] {
+        const term = filterBy.term.toLowerCase();
+        return contacts.filter(contact =>
+            contact.name.toLowerCase().includes(term) ||
+            contact.email.toLowerCase().includes(term)
+        );
+    }
+
+    public setFilterBy(filterBy: Filter) {
+        this._filterBy$.next(filterBy);
     }
 
     private handleError(error: HttpErrorResponse) {

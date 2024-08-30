@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Contact } from '../../models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { ContactService } from '../../services/contact.service';
+import { ContactService } from '../../services/async-contact.service';
+// import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'contact-details',

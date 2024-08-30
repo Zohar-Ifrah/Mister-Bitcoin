@@ -2,6 +2,8 @@ const { getCollection, toObjectId } = require('../../services/db.service')
 
 const COLLECTION_NAME = 'contact'
 
+console.log("contact.service")
+
 module.exports = {
     query,
     add,
@@ -12,7 +14,6 @@ module.exports = {
 
 async function query(filterBy) {
     try {
-        // console.log("filterBy>>>", filterBy)
         const criteria = _buildCriteria(filterBy)
 
         const collection = await getCollection(COLLECTION_NAME)
@@ -21,16 +22,21 @@ async function query(filterBy) {
         return contacts
     } catch (err) {
         console.error('Error querying contacts:', err)
-        throw err
+        throw new Error(`Failed to query contacts: ${err.message}`)
     }
 }
 
 async function add(contact) {
-    const collection = await getCollection(COLLECTION_NAME)
-    const contactModel = _createContactModel(contact)
+    try {
+        const collection = await getCollection(COLLECTION_NAME)
+        const contactModel = _createContactModel(contact)
 
-    const doc = await collection.insertOne(contactModel)
-    return doc.ops[0]
+        const doc = await collection.insertOne(contactModel)
+        return { ...contactModel, _id: doc.insertedId }
+    } catch (err) {
+        console.error('Error adding contact:', err)
+        throw new Error(`Failed to add contact: ${err.message}`)
+    }
 }
 
 async function get(contactId) {
@@ -39,27 +45,42 @@ async function get(contactId) {
         const collection = await getCollection(COLLECTION_NAME)
         const contact = await collection.findOne({ _id: objectId })
 
+        if (!contact) throw new Error('Contact not found')
         return contact
     } catch (err) {
         console.error('Error fetching contact:', err)
-        return null
+        throw new Error(`Failed to fetch contact: ${err.message}`)
     }
 }
 
 async function update(contact) {
-    const collection = await getCollection(COLLECTION_NAME)
-    const updatedContact = {
-        ...contact,
-        _id: toObjectId(contact._id)
+    try {
+        const collection = await getCollection(COLLECTION_NAME)
+        const updatedContact = {
+            ...contact,
+            _id: toObjectId(contact._id)
+        }
+        const result = await collection.updateOne({ _id: updatedContact._id }, { $set: updatedContact })
+
+        if (result.matchedCount === 0) throw new Error('Contact not found')
+        return updatedContact
+    } catch (err) {
+        console.error('Error updating contact:', err)
+        throw new Error(`Failed to update contact: ${err.message}`)
     }
-    await collection.updateOne({ _id: updatedContact._id }, { $set: updatedContact })
-    return updatedContact
 }
 
 async function remove(contactId) {
-    const collection = await getCollection(COLLECTION_NAME)
-    const { result } = await collection.deleteOne({ _id: toObjectId(contactId) })
-    return result.n > 0
+    try {
+        const collection = await getCollection(COLLECTION_NAME)
+        const result = await collection.deleteOne({ _id: toObjectId(contactId) })
+
+        if (result.deletedCount === 0) throw new Error('Contact not found or already deleted')
+        return true
+    } catch (err) {
+        console.error('Error removing contact:', err)
+        throw new Error(`Failed to remove contact: ${err.message}`)
+    }
 }
 
 function _createContactModel({ name, email, phone }) {

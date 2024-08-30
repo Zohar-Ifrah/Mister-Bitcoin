@@ -3,6 +3,7 @@ const logger = require('../../services/logger.service')
 const { ObjectId } = require('mongodb')
 
 const COLLECTION_NAME = 'user'
+console.log("user.service")
 
 module.exports = {
     query,
