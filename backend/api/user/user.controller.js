@@ -9,7 +9,7 @@ async function query(req, res) {
         res.json(users)
     } catch (err) {
         logger.error('Error querying users:', err)
-        res.status(500).json({ err })
+        res.status(500).json({ message: 'Error querying users', error: err.message })
     }
 }
 
