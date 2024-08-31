@@ -7,6 +7,8 @@ import { finalize } from 'rxjs';
 
 export const contactResolver: ResolveFn<Contact> = (route, state) => {
   const id = route.params['id']
+  console.log("reslover id >>", id);
+  
   const contactService = inject(ContactService)
   const loaderService = inject(LoaderService)
   loaderService.setIsLoading(true)

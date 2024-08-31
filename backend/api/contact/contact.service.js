@@ -98,16 +98,20 @@ function _buildCriteria(filterBy) {
         const txtCriteria = { $regex: filterBy.name, $options: 'i' }
         criteria.name = txtCriteria
     }
-
-    if (filterBy.email) {
-        const txtCriteria = { $regex: filterBy.email, $options: 'i' }
-        criteria.email = txtCriteria
+    
+    if (filterBy.term) {
+        const txtCriteria = { $regex: filterBy.term, $options: 'i' }
+        criteria.term = txtCriteria
     }
+    // if (filterBy.email) {
+    //     const txtCriteria = { $regex: filterBy.email, $options: 'i' }
+    //     criteria.email = txtCriteria
+    // }
 
-    if (filterBy.phone) {
-        const txtCriteria = { $regex: filterBy.phone, $options: 'i' }
-        criteria.phone = txtCriteria
-    }
+    // if (filterBy.phone) {
+    //     const txtCriteria = { $regex: filterBy.phone, $options: 'i' }
+    //     criteria.phone = txtCriteria
+    // }
 
     console.log("Criteria built:", criteria)
     return criteria

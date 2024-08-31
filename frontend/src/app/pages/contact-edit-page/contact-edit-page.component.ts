@@ -36,7 +36,6 @@ export class ContactEditPageComponent implements OnInit {
     this.route.data
       .pipe(
         filter(data => data['contact']),
-        map(data => data['contact']),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(({ contact }) => {

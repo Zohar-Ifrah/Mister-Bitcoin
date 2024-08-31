@@ -14,8 +14,9 @@ export class ContactFilterComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef)
   private contactService = inject(ContactService)
-  filterSubject = new Subject
-  filterBy!: Filter
+
+  filterSubject = new Subject<string>();
+  filterBy: Filter = { term: '' };
 
   ngOnInit(): void {
     this.contactService.filterBy$
@@ -25,11 +26,11 @@ export class ContactFilterComponent implements OnInit {
       })
     this.filterSubject
       .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
+        debounceTime(400),
+        // distinctUntilChanged()
       )
       .subscribe(
-        () => this.contactService.setFilterBy(this.filterBy)
+        term => this.contactService.setFilterBy({ term })
       )
   }
 
