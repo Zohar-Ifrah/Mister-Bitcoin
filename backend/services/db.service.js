@@ -2,7 +2,6 @@ const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
 require('dotenv').config() 
 
-
 const url = process.env.MONGO_URI
 const dbName = process.env.DB_NAME
 
@@ -11,7 +10,7 @@ var dbConn = null
 async function connect() {
     if (dbConn) return dbConn
     try {
-        const client = await MongoClient.connect(url, { useUnifiedTopology: true, useNewUrlParser: true })
+        const client = await MongoClient.connect(url)
         const db = client.db(dbName)
         dbConn = db
         console.log('DB connected!')
