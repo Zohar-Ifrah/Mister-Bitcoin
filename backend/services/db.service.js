@@ -1,4 +1,5 @@
 require('dotenv').config() 
+const dote = require('dotenv').config() 
 const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
 
@@ -7,6 +8,9 @@ const dbName = process.env.DB_NAME
 
 var dbConn = null
 console.log('Connecting to DB with URI:', url);
+console.log('Connecting to DB with URI:', dote);
+console.log('Connecting to DB with URI:', dote.parsed.MONGO_URI);
+console.log('Connecting to DB with URI:', dote.parsed.DB_NAME);
 async function connect() {
     if (dbConn) return dbConn
     try {
