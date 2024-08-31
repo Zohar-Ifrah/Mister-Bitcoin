@@ -6,7 +6,7 @@ const url = process.env.MONGO_URI
 const dbName = process.env.DB_NAME
 
 var dbConn = null
-
+console.log('Connecting to DB with URI:', url);
 async function connect() {
     if (dbConn) return dbConn
     try {
