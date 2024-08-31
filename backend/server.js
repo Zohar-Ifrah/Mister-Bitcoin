@@ -1,9 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const logger = require('./services/logger.service')
 // const socketService = require('./services/socket.service')
-require('dotenv').config()
 
 // Routes import
 const contactRoutes = require('./api/contact/contact.routes')
