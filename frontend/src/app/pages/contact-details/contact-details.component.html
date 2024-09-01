@@ -9,6 +9,14 @@
 
         <p>Email: <input type="text" [value]="contact.email" readonly>
         </p>
+        <!-- <transfer-fund
+        (transferCoins)="onTransferCoins($event)"
+        [contact]="contact"
+        [maxCoins]="user.coins"
+    ></transfer-fund> -->
+    </section>
+    <section *ngIf="contactMoves$ | async as moves">
+        <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>
     </section>
     <button (click)="onBack()">back</button>
 </section>

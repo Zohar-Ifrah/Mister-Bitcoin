@@ -19,6 +19,9 @@ import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './cmps/loader/loader.component';
+import { MsgComponent } from './cmps/msg/msg.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { MoveListComponent } from './cmps/move-list/move-list.component';
 
 
 
@@ -36,7 +39,10 @@ import { LoaderComponent } from './cmps/loader/loader.component';
     HeaderComponent,
     PageNotFoundComponent,
     ContactEditPageComponent,
-    LoaderComponent
+    LoaderComponent,
+    MsgComponent,
+    SignupPageComponent,
+    MoveListComponent
   ],
   imports: [
     BrowserModule,

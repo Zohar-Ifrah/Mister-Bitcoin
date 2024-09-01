@@ -1,0 +1,10 @@
+<div *ngIf="moves.length" class="moves">
+	<h2>{{ title }}</h2>
+	<div *ngFor="let move of moves" class="capitalize flex transfers-container">
+		<span>
+			<b>{{ move.amount }} </b> coins
+		</span>
+		<span *ngIf="!_contact" class="name-container">to: {{ move.to }}</span>
+		<span>At: {{ move.at * 1000 | date : "dd.MM.yy HH:mm" }}</span>
+	</div>
+</div>

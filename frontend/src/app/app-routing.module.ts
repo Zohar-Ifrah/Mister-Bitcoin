@@ -9,36 +9,52 @@ import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit
 import { contactResolver } from './resolvers/contact.resolver';
 import { StatisticPageComponent } from './pages/statistic-page/statistic-page.component';
 import { authGuard } from './guards/auth.guard';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { noAuthGuard } from './guards/no-auth.guard';
 
 const routes: Routes = [
-  { path: "home", component: HomePageComponent },
+
   {
-    path: "contact", component: ContactPageComponent, children: [
-      { path: "edit", component: ContactEditPageComponent },
+    path: "home", component: HomePageComponent,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: "contact", component: ContactPageComponent,
+    children: [
+      {
+        path: "edit",
+        component: ContactEditPageComponent,
+      },
       {
         path: "edit/:id",
         component: ContactEditPageComponent,
         resolve: { contact: contactResolver },
       }
-    ]
-  },
-  // { path: "contact/edit", component: ContactEditPageComponent },
-  {
-    path: "contact/:id",
-    component: ContactDetailsComponent,
-    canActivate: [authGuard],
-    resolve: { contact: contactResolver}
+    ],
+    canActivate: [authGuard]
   },
 
-  // {
-  //   path: "contact/edit/:id",
-  //   component: ContactEditPageComponent,
-  //   resolve: { contact: contactResolver },
-  // },
-  { path: "stats", component: StatisticPageComponent },
+  {
+    path: "contact/:id", component: ContactDetailsComponent,
+    resolve: { contact: contactResolver },
+    canActivate: [authGuard]
+  },
+
+  {
+    path: "stats", component: StatisticPageComponent,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: "signup", component: SignupPageComponent,
+    canActivate: [noAuthGuard],
+    data: { isNoAuth: true }
+  },
+
   // { path: "about", component: HomePageComponent }
 
-  { path: "", pathMatch: "full", redirectTo: "home" },
+  { path: "", pathMatch: "full", redirectTo: "signup" },
   { path: "**", component: PageNotFoundComponent }
 ]
 

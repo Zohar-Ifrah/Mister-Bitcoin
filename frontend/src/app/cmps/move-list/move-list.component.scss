@@ -1,0 +1,29 @@
+.moves {
+    width: max-content;
+    .transfers-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1em;
+        width: max-content;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        padding: 20px;
+
+        span {
+            border: 1px solid rgba(0, 0, 0, 0.447);
+            padding: .5rem;
+            border-radius: .25em;
+        }
+    }
+
+    b {
+        color: rgba(0, 128, 0, 0.9);
+        font-size: 1.1em;
+    }
+}

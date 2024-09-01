@@ -1,31 +1,51 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Contact } from '../../models/contact.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, switchMap } from 'rxjs';
-import { ContactService } from '../../services/async-contact.service';
-// import { ContactService } from '../../services/contact.service';
+import { combineLatest, filter, map, Observable, Subscription, take } from 'rxjs';
+import { UserService } from '../../services/user.service';
+import { MsgService } from '../../services/msg.service';
+
 
 @Component({
   selector: 'contact-details',
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
-export class ContactDetailsComponent implements OnInit {
+export class ContactDetailsComponent implements OnInit, OnDestroy {
 
-  private contactService = inject(ContactService)
+  private msgService = inject(MsgService)
+  private userService = inject(UserService)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
+
+  subscription!: Subscription
+  contact: Contact | null = null
 
   contact$: Observable<Contact> = this.route.data.pipe(
     map(data => data['contact'])
   )
+  user$ = this.userService.loggedInUser$
+
+  contactMoves$ = combineLatest([this.user$, this.contact$]).pipe(
+    filter(([user]) => !!user),
+    map(([user, contact]) => user?.moves.filter(move => move.toId === contact._id)),
+  )
 
   ngOnInit(): void {
-    // this.contact$ = this.route.data.pipe()
-    // this.contact$ = this.route.params.pipe(
-    //   switchMap(params => this.contactService.getContactById(params["id"]))
-    // )
+    this.subscription = this.contact$.subscribe(contact => this.contact = contact)
   }
+
+  // onTransferCoins(amount: number) {
+  //   this.userService.addMove(this.contact, amount)
+  //     .pipe(take(1))
+  //     .subscribe({
+  //       next: () => {
+  //         this.msgService.setSuccessMsg(`Transferred ${amount} coins to ${this.contact?.name}`);
+  //       },
+  //       error: (err) => console.log(err)
+  //     });
+  // }
+
 
   onBack() {
     this.router.navigateByUrl("/contact")
@@ -33,5 +53,9 @@ export class ContactDetailsComponent implements OnInit {
 
   getRoboHashUrl(id: string) {
     return `https://robohash.org/${id}.png?size=300x300`
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 }

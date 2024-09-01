@@ -1,6 +1,6 @@
+<!-- <button (click)="onAddMoveDemo()">Add Move Demo</button> -->
 <section *ngIf="user$ | async as user" class="home-page">
-  <h3>Mister-BITCoin</h3>
-  <h2> hello {{user.name}}</h2>
+  <h2> Hello {{user.name | titlecase }}</h2>
   <p>
     <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/coins_v2y8r2.png" alt="Coins">
     Coins:{{user.coins}}
@@ -8,4 +8,21 @@
   <p> <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/bitcoin_s3wm76.png" alt="BTC">
     BTC:{{BTC$ | async}}
   </p>
+  <move-list 
+    *ngIf="userMoves$ | async as userMoves"
+    [contact]="null"
+    [moves]="userMoves">
+  </move-list>
+  <p *ngIf="!user.moves.length">No transactions yet...</p>
 </section>
+<!-- <section *ngIf="user$ | async as user" class="home-page">
+	<h1>Hello {{ user.name | titlecase }}!</h1>
+	<h3>Coins: {{ user.coins }}</h3>
+	<h3>BTC: {{ BTC$ | async }}</h3>
+	<move-list
+		*ngIf="userMoves$ | async as userMoves"
+		[contact]="null"
+		[moves]="userMoves"
+	></move-list>
+	<p *ngIf="!user.moves.length">No transactions yet...</p>
+</section>  -->
