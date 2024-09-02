@@ -28,6 +28,7 @@ async function get(req, res) {
 
 async function add(req, res) {
     const user = req.body
+    
     try {
         const newUser = await userService.add(user)
         res.json(newUser)

@@ -1,6 +1,6 @@
-<section class="contact-details">
-    <section *ngIf="contact$ |async as contact">
-        <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+<section class="contact-details" *ngIf="contact$ |async as contact">
+    <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+    <section *ngIf="user$ | async as user">
         <p>Name: <input type="text" [value]="contact.name" readonly>
         </p>
 
@@ -9,11 +9,8 @@
 
         <p>Email: <input type="text" [value]="contact.email" readonly>
         </p>
-        <!-- <transfer-fund
-        (transferCoins)="onTransferCoins($event)"
-        [contact]="contact"
-        [maxCoins]="user.coins"
-    ></transfer-fund> -->
+        <transfer-fund (transferCoins)="onTransferCoins($event)" [contact]="contact"
+            [maxCoins]="user.coins"></transfer-fund>
     </section>
     <section *ngIf="contactMoves$ | async as moves">
         <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>

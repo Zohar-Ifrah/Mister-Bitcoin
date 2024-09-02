@@ -29,9 +29,12 @@ async function add(user) {
     try {
         const collection = await getCollection(COLLECTION_NAME)
         const userModel = _createUserModel(user)
-        const doc = await collection.insertOne(userModel)
+        const result = await collection.insertOne(userModel)
 
-        return doc.ops[0]
+        return {
+            ...userModel,
+            _id: result.insertedId
+        }
     } catch (err) {
         logger.error('Error adding user:', err)
         throw err
@@ -73,8 +76,8 @@ async function update(user) {
 async function remove(userId) {
     try {
         const collection = await getCollection(COLLECTION_NAME)
-        const { result } = await collection.deleteOne({ _id: toObjectId(userId) })
-        return result.n > 0
+        const result = await collection.deleteOne({ _id: toObjectId(userId) })
+        return result.deletedCount > 0
     } catch (err) {
         logger.error('Error removing user:', err)
         throw err

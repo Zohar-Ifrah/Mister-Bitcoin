@@ -1,0 +1,8 @@
+<div class="capitalize flex center transferfund-container">
+	transfer coins to {{ contact.name }}
+	<form class="flex align-center wrap" (ngSubmit)="onTransferCoins(+input.value)">
+		<span class="capitalize"> amount </span>
+		<input #input name="amount" type="number" placeholder="0" [(ngModel)]="amount" />
+		<button class="capitalize button">transfer</button>
+	</form>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
-import { Observable, BehaviorSubject, throwError } from 'rxjs'
+import { Observable, BehaviorSubject, throwError, of } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
 import { Contact } from '../models/contact.model'
 import { Filter } from '../models/filter.model'
@@ -91,6 +91,18 @@ export class ContactService {
             catchError(this._handleError)
         )
     }
+
+    // public getRandomContact(): Observable<Contact> {
+    //     return this.contacts$.pipe(
+    //         switchMap(contacts => {
+    //             if (contacts.length === 0) {
+    //                 return throwError(() => new Error('No contacts available'))
+    //             }
+    //             const randomIndex = Math.floor(Math.random() * contacts.length)
+    //             return of(contacts[randomIndex])
+    //         })
+    //     );
+    // }
 
     public setFilterBy(filterBy: Filter) { // Trigger loadContacts when filter changes
         this._filterBy$.next(filterBy)

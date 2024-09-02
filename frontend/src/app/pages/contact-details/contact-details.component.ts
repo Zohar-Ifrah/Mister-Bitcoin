@@ -19,7 +19,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   private router = inject(Router)
 
   subscription!: Subscription
-  contact: Contact | null = null
+  contact!: Contact 
 
   contact$: Observable<Contact> = this.route.data.pipe(
     map(data => data['contact'])
@@ -35,16 +35,16 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     this.subscription = this.contact$.subscribe(contact => this.contact = contact)
   }
 
-  // onTransferCoins(amount: number) {
-  //   this.userService.addMove(this.contact, amount)
-  //     .pipe(take(1))
-  //     .subscribe({
-  //       next: () => {
-  //         this.msgService.setSuccessMsg(`Transferred ${amount} coins to ${this.contact?.name}`);
-  //       },
-  //       error: (err) => console.log(err)
-  //     });
-  // }
+  onTransferCoins(amount: number) {
+    this.userService.addMove(this.contact, amount)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.msgService.setSuccessMsg(`Transferred ${amount} coins to ${this.contact?.name}`);
+        },
+        error: (err) => console.log(err)
+      });
+  }
 
 
   onBack() {

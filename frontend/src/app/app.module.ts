@@ -22,6 +22,7 @@ import { LoaderComponent } from './cmps/loader/loader.component';
 import { MsgComponent } from './cmps/msg/msg.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { MoveListComponent } from './cmps/move-list/move-list.component';
+import { TransferFundComponent } from './cmps/transfer-fund/transfer-fund.component';
 
 
 
@@ -42,7 +43,8 @@ import { MoveListComponent } from './cmps/move-list/move-list.component';
     LoaderComponent,
     MsgComponent,
     SignupPageComponent,
-    MoveListComponent
+    MoveListComponent,
+    TransferFundComponent
   ],
   imports: [
     BrowserModule,

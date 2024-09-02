@@ -5,6 +5,6 @@
 			<b>{{ move.amount }} </b> coins
 		</span>
 		<span *ngIf="!_contact" class="name-container">to: {{ move.to }}</span>
-		<span>At: {{ move.at * 1000 | date : "dd.MM.yy HH:mm" }}</span>
+		<span>At: {{ move.at | date : "dd.MM.yy HH:mm" }}</span>
 	</div>
 </div>

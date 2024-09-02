@@ -99,10 +99,10 @@ function _buildCriteria(filterBy) {
         criteria.name = txtCriteria
     }
     
-    if (filterBy.term) {
-        const txtCriteria = { $regex: filterBy.term, $options: 'i' }
-        criteria.term = txtCriteria
-    }
+    // if (filterBy.term) {
+    //     const txtCriteria = { $regex: filterBy.term, $options: 'i' }
+    //     criteria.term = txtCriteria
+    // }
     // if (filterBy.email) {
     //     const txtCriteria = { $regex: filterBy.email, $options: 'i' }
     //     criteria.email = txtCriteria
