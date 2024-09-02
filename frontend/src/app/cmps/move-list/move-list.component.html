@@ -2,7 +2,7 @@
 	<h2>{{ title }}</h2>
 	<div *ngFor="let move of moves" class="capitalize flex transfers-container">
 		<span>
-			<b>{{ move.amount }} </b> coins
+			<b>{{ move.amount }} </b> {{move.amount > 1? "coins" : "coin"}}
 		</span>
 		<span *ngIf="!_contact" class="name-container">to: {{ move.to }}</span>
 		<span>At: {{ move.at | date : "dd.MM.yy HH:mm" }}</span>

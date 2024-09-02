@@ -36,7 +36,7 @@ export class ContactService {
             switchMap(filterBy => {
                 const params = new HttpParams().set('name', filterBy.term)
                 return this.http.get<Contact[]>(this._apiUrl, { params }).pipe(
-                    tap(contacts => this._contacts$.next(contacts)), // Update BehaviorSubject
+                    tap(contacts => this._contacts$.next(contacts)),
                     catchError(this._handleError)
                 )
             })

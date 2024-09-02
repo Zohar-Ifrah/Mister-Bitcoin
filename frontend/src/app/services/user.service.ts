@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { User } from "../models/user.model";
-import { BehaviorSubject, EMPTY, from, map, Observable, of, switchMap, tap, throwError } from "rxjs";
+import { BehaviorSubject, EMPTY, map, Observable, of, switchMap, tap, throwError } from "rxjs";
 import { storageService } from "./storage.service";
 import { Contact } from "../models/contact.model";
 import { Move } from "../models/move.model";
 
-const ENTITY = 'user'
 const ENTITY_LOGGEDIN_USER = 'loggedinUser'
 
 @Injectable({
@@ -38,18 +37,14 @@ export class UserService {
   }
 
   public logout() {
-    return of(null).pipe(
-      tap(() => {
-        // this._saveLocalUser(null)
-        sessionStorage.clear()
-      })
-    );
+    const empty ={ _id: '', name: '', coins: 0, moves: [] }
+    this._saveLocalUser(empty, true)
   }
 
   public addMove(contact: Contact, amount: number): Observable<User> {
-    if (!amount || amount < 0) return EMPTY; // חזר מבלי לשדר ערך
+    if (!amount || amount < 0) return EMPTY
 
-    const loggedInUser = { ...this.getLoggedInUser() };
+    const loggedInUser = { ...this._getLoggedInUser() };
     if (loggedInUser.coins < amount) return throwError(() => 'Not enough coins!');
 
     const newMove = this._createMove(contact, amount);
@@ -57,22 +52,15 @@ export class UserService {
     loggedInUser.moves.unshift(newMove);
 
     return this.http.put<User>(`${this._apiUrl}/${loggedInUser._id}`, loggedInUser).pipe(
-      tap(() => this._saveLocalUser(loggedInUser)) // שומר את המשתמש המעודכן ב-session
+      tap(() => this._saveLocalUser(loggedInUser))
     );
   }
 
-
-  getLoggedInUser(): User {
-    // return this._loggedInUser$.value;
-    return this._loggedInUser$.value || { _id: '', name: 'Guest', coins: 0, moves: [] };
+  private _getLoggedInUser(): User {
+    return this._loggedInUser$.value || null;
   }
-  //   getLoggedInUser(): User {
-  //     const user = this._loggedInUser$.value;
-  //     if (!user) throw new Error('No logged in user found');
-  //     return user;
-  // }
 
-  _createUser(name: string): Partial<User> {
+  private _createUser(name: string): Partial<User> {
     return {
       name,
       coins: 100,
@@ -80,7 +68,7 @@ export class UserService {
     }
   }
 
-  _createMove(contact: Contact, amount: number): Move {
+  private _createMove(contact: Contact, amount: number): Move {
     return {
       toId: contact._id,
       to: contact.name,
@@ -89,8 +77,14 @@ export class UserService {
     }
   }
 
-  _saveLocalUser(user: User) {
-    this._loggedInUser$.next(user && { ...user });
-    storageService.saveToSession(ENTITY_LOGGEDIN_USER, user);
+  private _saveLocalUser(user: User, logout: boolean = false) {
+    if (logout) {
+      sessionStorage.removeItem(ENTITY_LOGGEDIN_USER)
+      this._loggedInUser$.next(storageService.loadFromSession(ENTITY_LOGGEDIN_USER))
+    }
+    else {
+      this._loggedInUser$.next(user && { ...user });
+      storageService.saveToSession(ENTITY_LOGGEDIN_USER, user);
+    }
   }
 }

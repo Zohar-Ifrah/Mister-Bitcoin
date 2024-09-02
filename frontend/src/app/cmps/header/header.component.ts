@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-// import { ContactService } from '../../services/contact.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-header',
@@ -7,18 +12,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  // title = "mister-bitcoin"
-  // currPage = "home"
 
-  // constructor(private contactService: ContactService) { }
+  private userService = inject(UserService)
+  private router = inject(Router)
+  loggedInUser$!: Observable<User>
+  // loggedInUser$!: Observable<User | null>
 
   ngOnInit(): void {
-    // this.contactService.loadContacts().subscribe({
-    //   error: err => {
-    //     console.log('err:', err)
-    //   }
-    // })
+    this.loggedInUser$ = this.userService.loggedInUser$
   }
 
+  onLogout(): void {
+    this.userService.logout()
+    this.router.navigateByUrl("/signup")
+  }
 
 }
