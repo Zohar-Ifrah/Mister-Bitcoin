@@ -45,7 +45,7 @@ export class ContactEditPageComponent implements OnInit {
   }
 
   async onSaveContact() {
-    const contactToSave = { ...this.contact ,...this.form.value } as Contact
+    const contactToSave = { ...this.contact, ...this.form.value } as Contact
     this.contactService.saveContact(contactToSave)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -54,8 +54,7 @@ export class ContactEditPageComponent implements OnInit {
       })
   }
 
-  onBack(ev: Event) {
-    ev.preventDefault()
+  onBack() {
     this.router.navigateByUrl('/contact')
   }
 }

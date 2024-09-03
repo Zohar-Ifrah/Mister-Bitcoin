@@ -2,7 +2,7 @@
     <h1 class="logo" routerLinkActive="active" routerLink="/home">Mister-Bitcoin</h1>
     <nav class="links">
         <a routerLinkActive="active" routerLink="/home">Home</a>
-        <a routerLinkActive="active" routerLink="/contact">contacts</a>
+        <a routerLinkActive="active" routerLink="/contact">Contacts</a>
         <a routerLinkActive="active" routerLink="/stats">Statistic</a>
         <span *ngIf="loggedInUser$ | async" (click)="onLogout()">Logout</span>
     </nav>

@@ -23,6 +23,7 @@ import { MsgComponent } from './cmps/msg/msg.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { MoveListComponent } from './cmps/move-list/move-list.component';
 import { TransferFundComponent } from './cmps/transfer-fund/transfer-fund.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 
 
@@ -44,7 +45,8 @@ import { TransferFundComponent } from './cmps/transfer-fund/transfer-fund.compon
     MsgComponent,
     SignupPageComponent,
     MoveListComponent,
-    TransferFundComponent
+    TransferFundComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

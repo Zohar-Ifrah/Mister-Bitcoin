@@ -1,9 +1,12 @@
 <section class="contact-preview">
     <a routerLink="/contact/{{contact._id}}" style="text-decoration: none; color: inherit;">
         <li>
-            <div class="flex space-between width-full">
+            <div class="contact-preview-header flex space-between width-full">
                 {{contact.name}}
-                <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">X</button>
+                <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">
+                    <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725360519/exit.1613670bda75ad67062739301b4cf941_kfqhk9.svg"
+                     alt="X">
+                </button>
             </div>
 
             <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">

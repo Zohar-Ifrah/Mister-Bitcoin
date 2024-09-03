@@ -12,4 +12,20 @@
         width: 37.5em;
         z-index: 51;
     }
+
+    .back-container {
+        button {
+            border-color: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            width: 1.4em;
+            background-color: inherit;
+
+        }
+
+        :hover {
+            background-color: #d9dcdf;
+        }
+    }
 }

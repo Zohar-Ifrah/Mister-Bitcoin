@@ -1,5 +1,12 @@
 <section class="contact-details" *ngIf="contact$ |async as contact">
+    <section class="back-container">
+        <button (click)="onBack()">
+            <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725359112/arrow-left-bold_veibjr_gyhloz.svg"
+                alt="X">
+        </button>
+    </section>
     <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+
     <section *ngIf="user$ | async as user">
         <p>Name: <input type="text" [value]="contact.name" readonly>
         </p>
@@ -12,8 +19,8 @@
         <transfer-fund (transferCoins)="onTransferCoins($event)" [contact]="contact"
             [maxCoins]="user.coins"></transfer-fund>
     </section>
+
     <section *ngIf="contactMoves$ | async as moves">
         <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>
     </section>
-    <button (click)="onBack()">back</button>
 </section>
