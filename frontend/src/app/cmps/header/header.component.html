@@ -1,6 +1,7 @@
 <header class="container">
     <h1 class="logo" routerLinkActive="active" routerLink="/home">Mister-Bitcoin</h1>
-    <nav class="links">
+    <div class="hamburger-menu" (click)="toggleMenu()">&#9776;</div>
+    <nav class="links" [class.active]="isMenuOpen">
         <a routerLinkActive="active" routerLink="/home">Home</a>
         <a routerLinkActive="active" routerLink="/contact">Contacts</a>
         <a routerLinkActive="active" routerLink="/stats">Statistic</a>

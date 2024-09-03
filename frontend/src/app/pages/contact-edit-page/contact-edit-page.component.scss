@@ -1,4 +1,7 @@
 .contact-edit {
+    h1{
+        margin-block-start: 0;
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,11 +45,11 @@ label {
     }
 }
 
-.Save-container {
+.save-btn-container {
     button {
         width: fit-content;
         border-radius: 15px;
-        margin-block-start: 0.6em;
+        margin-block-start: 1em;
         cursor: pointer;
         transition: transform 0.1s, box-shadow 0.2s;
         padding: 5px 10px;
