@@ -27,7 +27,7 @@ export class ContactFilterComponent implements OnInit {
     this.filterSubject
       .pipe(
         debounceTime(400),
-        // distinctUntilChanged()
+        distinctUntilChanged()
       )
       .subscribe(
         term => this.contactService.setFilterBy({ term })

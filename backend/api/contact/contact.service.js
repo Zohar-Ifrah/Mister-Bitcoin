@@ -1,4 +1,5 @@
 const { getCollection, toObjectId } = require('../../services/db.service')
+// const { removeAll } = require('./contact.controller')
 
 const COLLECTION_NAME = 'contact'
 
@@ -10,6 +11,7 @@ module.exports = {
     get,
     update,
     remove,
+    removeAll,
 }
 
 async function query(filterBy) {
@@ -83,11 +85,26 @@ async function remove(contactId) {
     }
 }
 
-function _createContactModel({ name, email, phone }) {
+async function removeAll() {
+    try {
+        const collection = await getCollection(COLLECTION_NAME)
+        const result = await collection.deleteMany({})
+
+        if (result.deletedCount === 0) throw new Error('No contacts were found to delete')
+        return true
+    } catch (err) {
+        console.error('Error removing contacts:', err)
+        throw new Error(`Failed to remove contacts: ${err.message}`)
+    }
+}
+
+
+function _createContactModel({ name, email, phone, imgID }) {
     return {
         name,
         email,
         phone,
+        imgID,
     }
 }
 
@@ -98,7 +115,7 @@ function _buildCriteria(filterBy) {
         const txtCriteria = { $regex: filterBy.name, $options: 'i' }
         criteria.name = txtCriteria
     }
-    
+
     // if (filterBy.term) {
     //     const txtCriteria = { $regex: filterBy.term, $options: 'i' }
     //     criteria.term = txtCriteria

@@ -5,7 +5,7 @@
                 alt="X">
         </button>
     </section>
-    <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+    <img [src]="getImage(contact.imgID)" alt="robo-you">
 
     <section *ngIf="user$ | async as user">
         <p>Name: <input type="text" [value]="contact.name" readonly>

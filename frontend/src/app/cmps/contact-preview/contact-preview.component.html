@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-            <img [src]="getRoboHashUrl(contact._id)" alt="robo-you">
+            <img [src]="getImage(contact.imgID)" alt="Profile Picture">
         </li>
     </a>
     <a routerLink="edit/{{contact._id}}" class="edit-link">Edit</a>

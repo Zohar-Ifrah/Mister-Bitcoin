@@ -1,4 +1,5 @@
 <section *ngIf="msg$ | async as msg" class="msg {{ msg.type }}">
-	<h4>{{ msg.txt }}</h4>
-	<button class="close-btn" (click)="onCloseMsg()">X</button>
+    <span class="icon">{{ msg.type === 'success' ? '✔️' : '❌' }}</span>
+    <h4>{{ msg.txt }}</h4>
+    <button class="close-btn" (click)="onCloseMsg()">×</button>
 </section>

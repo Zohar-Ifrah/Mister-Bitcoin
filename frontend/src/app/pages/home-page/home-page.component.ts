@@ -34,10 +34,11 @@ export class HomePageComponent {
   )
   onAddMoveDemo() {
     const contact = {
-      "_id": "66cf81e23b606ea16c615938",
+      "_id": "66d8420e5088216b4e1a498d",
       "name": "Floyd Rutledge",
       "email": "floydrutledge@renovize.com",
-      "phone": "+1 (807) 597-3629"
+      "phone": "+1 (807) 597-3629",
+      "imgID": "77"
     }
     const amount = Math.ceil(Math.random() * 10);
     this.userService.addMove(contact, amount).subscribe({
