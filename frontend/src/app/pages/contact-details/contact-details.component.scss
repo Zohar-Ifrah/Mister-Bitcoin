@@ -1,19 +1,41 @@
 .contact-details {
-    .edit-modal {
-        background-color: #fff;
-        border-radius: .875em;
-        box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
-        height: auto;
-        left: 50%;
-        position: fixed;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        width: 37.5em;
-        z-index: 51;
+    .info-transfer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        flex-direction: row;
+
+        .contact-info-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                width: 16em;
+                border-radius: 50%;
+            }
+
+            span {
+                font-size: 2em;
+            }
+        }
     }
 
-    .back-container {
+    .back-edit-container {
+        display: flex;
+        background-color: #a4baba;
+        flex-direction: row;
+        padding: 0.4em;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5em;
+
+        a {
+            border-radius: 50%;
+            padding: 0.3em;
+            cursor: pointer;
+        }
+
         button {
             border-color: transparent;
             border-radius: 50%;
@@ -26,6 +48,16 @@
 
         :hover {
             background-color: #d9dcdf;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-details {
+        .info-transfer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 }

@@ -1,18 +1,19 @@
-
 <section *ngIf="user$ | async as user" class="home-page">
-  <h2> Hello {{user.name | titlecase }}</h2>
-  <p>
-    <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/coins_v2y8r2.png" alt="Coins">
-    Coins:{{user.coins}}
-  </p>
-  <p> <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/bitcoin_s3wm76.png" alt="BTC">
-    BTC:{{BTC$ | async}}
-  </p>
-  <button (click)="onAddMoveDemo()">Add Move Demo</button>
-  <move-list 
-    *ngIf="userMoves$ | async as userMoves"
-    [contact]="null"
-    [moves]="userMoves">
-  </move-list>
-  <p *ngIf="!user.moves.length">No transactions yet...</p>
+  <section>
+    <h2> Hello {{user.name | titlecase }}</h2>
+    <p>
+      <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/coins_v2y8r2.png" alt="Coins">
+      Coins:{{user.coins}}
+    </p>
+    <p> <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/bitcoin_s3wm76.png" alt="BTC">
+      BTC:{{BTC$ | async}}
+    </p>
+    <button (click)="onAddMoveDemo()">Add Move Demo</button>
+  </section>
+
+  <section>
+    <move-list *ngIf="userMoves$ | async as userMoves" [contact]="null" [moves]="userMoves">
+    </move-list>
+    <p *ngIf="!user.moves.length">No transactions yet...</p>
+  </section>
 </section>

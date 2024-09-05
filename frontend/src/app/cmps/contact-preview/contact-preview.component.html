@@ -1,16 +1,25 @@
 <section class="contact-preview">
     <a routerLink="/contact/{{contact._id}}" style="text-decoration: none; color: inherit;">
         <li>
-            <div class="contact-preview-header flex space-between width-full">
-                {{contact.name}}
-                <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">
-                    <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725360519/exit.1613670bda75ad67062739301b4cf941_kfqhk9.svg"
-                     alt="X">
-                </button>
-            </div>
+            <section class="contact-preview-header flex space-between width-full">
+                <section>
+                    <span>
+                        {{contact.name}}
+                    </span>
+                    <span showOnMoblie>
+                        {{contact.phone}}
+                    </span>
+                </section>
+                <section class="edit-contact-btns">
+                    <a (click)="stopP($event)" routerLink="edit/{{contact._id}}" class="edit-link hide-btn">✏️</a>
+                    <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">
+                        <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725360519/exit.1613670bda75ad67062739301b4cf941_kfqhk9.svg"
+                            alt="X">
+                    </button>
+                </section>
+            </section>
 
             <img [src]="getImage(contact.imgID)" alt="Profile Picture">
         </li>
     </a>
-    <a routerLink="edit/{{contact._id}}" class="edit-link">Edit</a>
 </section>

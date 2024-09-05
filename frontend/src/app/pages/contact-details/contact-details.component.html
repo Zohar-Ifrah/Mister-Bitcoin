@@ -1,26 +1,26 @@
 <section class="contact-details" *ngIf="contact$ |async as contact">
-    <section class="back-container">
+    <section class="back-edit-container">
         <button (click)="onBack()">
             <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725359112/arrow-left-bold_veibjr_gyhloz.svg"
                 alt="X">
         </button>
+        <!-- <a [routerLink]="['/contact/edit', contact._id]" class="edit-link">✏️</a> -->
     </section>
-    <img [src]="getImage(contact.imgID)" alt="robo-you">
+    <section class="info-transfer-container">
+        <section class="contact-info-container" *ngIf="user$ | async as user">
+            <img [src]="getImage(contact.imgID)" alt="Profile Picture">
 
-    <section *ngIf="user$ | async as user">
-        <p>Name: <input type="text" [value]="contact.name" readonly>
-        </p>
+            <span>{{contact.name}}</span>
 
-        <p>Phone: <input type="text" [value]="contact.phone" readonly>
-        </p>
+            <p>{{contact.phone}}</p>
+            <p>{{contact.email}}</p>
 
-        <p>Email: <input type="text" [value]="contact.email" readonly>
-        </p>
-        <transfer-fund (transferCoins)="onTransferCoins($event)" [contact]="contact"
-            [maxCoins]="user.coins"></transfer-fund>
-    </section>
+            <transfer-fund (transferCoins)="onTransferCoins($event)" [contact]="contact" [maxCoins]="user.coins">
+            </transfer-fund>
+        </section>
 
-    <section *ngIf="contactMoves$ | async as moves">
-        <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>
+        <section *ngIf="contactMoves$ | async as moves">
+            <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>
+        </section>
     </section>
 </section>

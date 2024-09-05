@@ -19,11 +19,30 @@
 }
 
 body:has(.click-outside) {
+
     .click-outside,
     .click-outside * {
         pointer-events: all;
     }
+
     :not(.click-outside, .click-outside *) {
         pointer-events: none;
     }
 }
+
+// Colors
+$primary-color: #1D3557;       // כחול כהה
+$secondary-color: #457B9D;     // כחול בהיר
+$accent-color: #2C6F91;        // כחול עמוק
+$background-color: #F1FAEE;    // רקע בהיר
+$text-color: #333333;          // טקסט כהה
+$highlight-color: #E63946;     // צבע דגש (אדום)
+$subtle-background: #A8DADC;   // רקע משני
+
+$green: #155724;
+$red: #721c24;
+// body {
+//     background-color: #717d7d;
+//     color: #333;
+//     font-family: Arial, sans-serif;
+// }

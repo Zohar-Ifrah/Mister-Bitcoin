@@ -24,6 +24,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { MoveListComponent } from './cmps/move-list/move-list.component';
 import { TransferFundComponent } from './cmps/transfer-fund/transfer-fund.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { ShowOnMoblieDirective } from './directives/show-on-moblie.directive';
 
 
 
@@ -46,7 +47,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SignupPageComponent,
     MoveListComponent,
     TransferFundComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    ShowOnMoblieDirective
   ],
   imports: [
     BrowserModule,

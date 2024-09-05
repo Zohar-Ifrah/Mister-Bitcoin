@@ -37,4 +37,8 @@ export class ContactPreviewComponent {
       this.onRemove.emit(contactId)
     }
   }
+
+  stopP(ev: MouseEvent) {
+    ev.stopPropagation()
+  }
 }

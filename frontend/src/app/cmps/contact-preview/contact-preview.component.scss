@@ -1,10 +1,25 @@
 li {
-    background:#e8e8f6;
+    background: #e8e8f6;
     padding: 0.2em;
     border-radius: 0.2em;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.contact-preview-header {
+    button {
+        border-color: transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.3em;
+        width: 1.4em;
+        background-color: inherit;
+    }
+
+    // :hover {
+    //     // background-color: #d1d7dd;
+    // }
 }
 
 .hide-btn {
@@ -18,17 +33,78 @@ li {
     opacity: 1;
 }
 
-.contact-preview-header {
-    button {
-        border-color: transparent;
+.edit-contact-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+
+    a {
+        padding: 0.3em;
         border-radius: 50%;
-        cursor: pointer;
-        font-size: 1.3em;
-        width: 1.4em;
-        background-color: inherit;
     }
 
     :hover {
-        background-color: #d1d7dd;
+        background-color: #d9dcdf;
     }
+}
+
+@media (max-width: 640px) {
+    img {
+        width: 4em;
+        border-radius: 50%;
+    }
+
+    li {
+        align-items: center;
+        flex-direction: row-reverse;
+        border-bottom: 1px solid #ccc;
+        padding: 0.5em;
+        padding-block: 1em;
+    }
+
+    // :hover .hide-btn {
+    //     // visibility: visible;
+    //     // opacity: 1;
+    // }
+
+    .contact-preview-header {
+        flex-direction: row;
+        align-items: center;
+        margin-inline-start: 0.5em;
+
+        button {
+            width: 100%;
+
+            img {
+                padding-block-start: 0.2em;
+            }
+        }
+    }
+
+    .edit-contact-btns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5em;
+
+        .hide-btn {
+            visibility: visible;
+            opacity: 1;
+
+            img {
+                width: 1em;
+            }
+        }
+
+        a {
+            padding: 0.5em;
+            border-radius: 50%;
+        }
+
+        :hover {
+            background-color: #d9dcdf;
+        }
+    }
+
 }
