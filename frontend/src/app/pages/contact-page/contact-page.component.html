@@ -1,6 +1,5 @@
 <section class="contact-page">
     <contact-filter />
-    <a routerLink="edit" class="add-link">Add contact</a>
     <contact-list (onRemove)="onRemoveContact($event)" [contacts]="contacts$ | async" />
 </section>
 <router-outlet />

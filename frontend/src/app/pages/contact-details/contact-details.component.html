@@ -20,7 +20,7 @@
         </section>
 
         <section *ngIf="contactMoves$ | async as moves">
-            <move-list *ngIf="moves.length" [contact]="contact" [moves]="moves"></move-list>
+            <move-list [contact]="contact" [moves]="moves"></move-list>
         </section>
     </section>
 </section>

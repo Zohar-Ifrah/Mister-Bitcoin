@@ -4,11 +4,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
 
-// .home-page > section:nth-of-type(2) {
-//     align-items: flex-end;
-//     display: flex;
-//     flex-direction: column;
-//     width: 100%;
-// }
+    .coins-info-container {
+        width: 17.2em;
+    }
+
+    .transactions-info-container {
+        width: 17.6em;
+    }
+}

@@ -1,6 +1,6 @@
-<div *ngIf="moves.length" class="moves">
+<div *ngIf="moves.length; else noMoves" class="moves">
 	<h2>{{ title }}</h2>
-	<div *ngFor="let move of moves" class="capitalize flex transfers-container {{home}}" >
+	<div *ngFor="let move of moves" class="capitalize flex transfers-container {{home}}">
 		<span>
 			<b>{{ move.amount }} </b> {{move.amount > 1? "coins" : "coin"}}
 		</span>
@@ -8,3 +8,10 @@
 		<span>{{ move.at | date : "dd.MM.yy HH:mm" }}</span>
 	</div>
 </div>
+
+<ng-template #noMoves>
+	<div class="moves">
+		<h2>{{ title }}</h2>
+		<p>No transactions yet... </p>
+	</div>
+</ng-template>
