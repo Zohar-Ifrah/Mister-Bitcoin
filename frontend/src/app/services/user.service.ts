@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { User } from "../models/user.model";
-import { BehaviorSubject, EMPTY, map, Observable, of, switchMap, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of, switchMap, tap, throwError } from "rxjs";
 import { storageService } from "./storage.service";
 import { Contact } from "../models/contact.model";
 import { Move } from "../models/move.model";
@@ -37,7 +37,7 @@ export class UserService {
   }
 
   public logout() {
-    const empty ={ _id: '', name: '', coins: 0, moves: [] }
+    const empty = { _id: '', name: '', coins: 0, moves: [] }
     this._saveLocalUser(empty, true)
   }
 
@@ -55,6 +55,19 @@ export class UserService {
       tap(() => this._saveLocalUser(loggedInUser))
     );
   }
+
+  public updateUser(user: User) {
+    return this.http.put<User>(`${this._apiUrl}/${user._id}`, user).pipe(
+      tap(updatedUser => {
+        this._saveLocalUser(updatedUser)
+      }),
+      catchError(err => {
+        return throwError(() => new Error('Update user failed: ' + err.message))
+      })
+    );
+  }
+
+
 
   private _getLoggedInUser(): User {
     return this._loggedInUser$.value || null;

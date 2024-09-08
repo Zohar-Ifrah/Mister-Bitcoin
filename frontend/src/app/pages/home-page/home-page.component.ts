@@ -22,16 +22,19 @@ export class HomePageComponent {
   destroyRef = inject(DestroyRef)
 
   user$: Observable<User> = this.userService.loggedInUser$
+
   userMoves$: Observable<Move[]> = this.user$.pipe(
     filter(user => !!user),
     map(user => user.moves.slice(0, 3)),
     takeUntilDestroyed(this.destroyRef)
   )
+
   BTC$: Observable<string> = this.user$.pipe(
     filter(user => !!user),
     switchMap(user => this.bitcoinService.getRate(user.coins)),
     takeUntilDestroyed(this.destroyRef),
   )
+
   onAddMoveDemo() {
     const contact = {
       "_id": "66d8420e5088216b4e1a498d",
@@ -50,8 +53,24 @@ export class HomePageComponent {
         this.msgService.setErrorMsg('Not enough coins!')
         console.error('Error adding move:', err);
       }
+    })
+  }
+
+  onAddCoinsDemo(user: User) {
+    const userToEdit = { ...user }
+    userToEdit.coins += 100
+    this.userService.updateUser(userToEdit).subscribe({
+      next: (updatedUser) => {
+        this.msgService.setSuccessMsg('+100 coins added successfully!')
+        console.log('Coins added successfully', updatedUser)
+      },
+      error: (err) => {
+        this.msgService.setErrorMsg('Failed to add coins')
+        console.error('Error updating user:', err)
+      }
     });
   }
+
 }
 // onAddMoveDemo() {
 //   const contact = {
