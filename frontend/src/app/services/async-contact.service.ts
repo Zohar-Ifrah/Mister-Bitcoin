@@ -11,8 +11,8 @@ import { NavigationEnd, Router } from '@angular/router'
 })
 export class ContactService {
 
-    private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/contact'
-    // private _apiUrl = 'http://localhost:3000/api/contact'
+    // private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/contact'
+    private _apiUrl = 'http://localhost:3000/api/contact'
 
     private _contacts$ = new BehaviorSubject<Contact[]>([])
     public contacts$ = this._contacts$.asObservable()

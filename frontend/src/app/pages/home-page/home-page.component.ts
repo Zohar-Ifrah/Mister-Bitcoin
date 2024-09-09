@@ -58,7 +58,14 @@ export class HomePageComponent {
 
   onAddCoinsDemo(user: User) {
     const userToEdit = { ...user }
-    userToEdit.coins += 100
+
+    if (userToEdit.coins < 500) {
+      userToEdit.coins += 100
+    }
+    else {
+      this.msgService.setErrorMsg('Reached the limit: over 500 coins')
+      return
+    }
     this.userService.updateUser(userToEdit).subscribe({
       next: (updatedUser) => {
         this.msgService.setSuccessMsg('+100 coins added successfully!')
@@ -72,19 +79,3 @@ export class HomePageComponent {
   }
 
 }
-// onAddMoveDemo() {
-//   const contact = {
-//     "_id": "66cf81e23b606ea16c615938",
-//     "name": "Floyd Rutledge",
-//     "email": "floydrutledge@renovize.com",
-//     "phone": "+1 (807) 597-3629"
-//   }
-
-//   const amount = Math.ceil(Math.random() * 10)
-//   // console.log(this.userService.addMove(contact, amount));
-
-//   this.userService.addMove(contact, amount)
-//     .subscribe({
-//       error: (err) => console.log(err)
-//     })
-// }

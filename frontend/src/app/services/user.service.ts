@@ -13,8 +13,8 @@ const ENTITY_LOGGEDIN_USER = 'loggedinUser'
 })
 export class UserService {
 
-  private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/user'
-  // private _apiUrl = 'http://localhost:3000/api/user'
+  // private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/user'
+  private _apiUrl = 'http://localhost:3000/api/user'
 
   constructor(private http: HttpClient) { }
 
