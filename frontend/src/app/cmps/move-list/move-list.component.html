@@ -4,7 +4,7 @@
 		<span>
 			<b>{{ move.amount }} </b> {{move.amount > 1? "coins" : "coin"}}
 		</span>
-		<span *ngIf="!_contact" class="name-container">to: {{ move.to }}</span>
+		<span (click)="navToContact(move.toId)" *ngIf="!_contact" class="name-container">to: {{ move.to }}</span>
 		<span>{{ move.at | date : "dd.MM.yy HH:mm" }}</span>
 	</div>
 </div>

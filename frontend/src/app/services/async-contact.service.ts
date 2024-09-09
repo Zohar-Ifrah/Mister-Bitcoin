@@ -11,8 +11,8 @@ import { NavigationEnd, Router } from '@angular/router'
 })
 export class ContactService {
 
-    // private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/contact'
-    private _apiUrl = 'http://localhost:3000/api/contact'
+    private _apiUrl = 'https://mister-bitcoin-7pqz.onrender.com/api/contact'
+    // private _apiUrl = 'http://localhost:3000/api/contact'
 
     private _contacts$ = new BehaviorSubject<Contact[]>([])
     public contacts$ = this._contacts$.asObservable()
@@ -84,13 +84,19 @@ export class ContactService {
     public deleteContact(id: string): Observable<void> {
         return this.http.delete<void>(`${this._apiUrl}/${id}`).pipe(
             tap(() => {
-                const contacts = this._contacts$.value
-                const updatedContacts = contacts.filter(contact => contact._id !== id)
-                this._contacts$.next(updatedContacts)
+                const contacts = this._contacts$.value;
+                const updatedContacts = contacts.filter(contact => contact._id !== id);
+                this._contacts$.next(updatedContacts);
             }),
-            catchError(this._handleError)
-        )
+            catchError(error => {
+                // תהליך טיפול בשגיאה
+                console.error('Error deleting contact:', error);
+                this._handleError(error); // אם יש צורך לטפל בשגיאה באופן ספציפי
+                return throwError(() => new Error('Failed to delete contact.')); // זורק שגיאה מותאמת אישית
+            })
+        );
     }
+    
 
     // public getRandomContact(): Observable<Contact> {
     //     return this.contacts$.pipe(
