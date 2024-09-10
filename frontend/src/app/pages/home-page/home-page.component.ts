@@ -20,7 +20,6 @@ export class HomePageComponent {
   private bitcoinService = inject(BitcoinService)
   private msgService = inject(MsgService)
   destroyRef = inject(DestroyRef)
-  contact = 123
   user$: Observable<User> = this.userService.loggedInUser$
 
   userMoves$: Observable<Move[]> = this.user$.pipe(

@@ -15,7 +15,7 @@
             <p *ngIf="nameInput.touched && form.invalid" class="errors">
                 <span *ngIf="nameInput.errors?.['required']">Name is required!</span>
                 <span *ngIf="nameInput.errors?.['nonEnglishLetters']">Only English letters are allowed!</span>
-                <span *ngIf="nameInput.errors?.['nameTaken']">Name is already taken.</span>
+                <!-- <span *ngIf="nameInput.errors?.['nameTaken']">Name is already taken.</span> -->
             </p>
             <span *ngIf="nameInput.pending && nameInput.touched && nameInput.dirty">
                 Fetching for data...
@@ -27,13 +27,14 @@
         <ng-container *ngIf="form.controls['email']as emailInput">
             <p *ngIf="emailInput.touched && form.invalid" class="errors">
                 <span *ngIf="emailInput.errors?.['required']">> Email is required </span>
+                <span *ngIf="emailInput.errors?.['emailTaken']">Email is already taken.</span>
             </p>
         </ng-container>
 
         <label for="phone">Phone</label>
         <input type="text" formControlName="phone" id="phone" />
         <div class="save-btn-container">
-            <button>Save</button>
+            <button [disabled]="form.pending || form.invalid" >Save</button>
         </div>
     </form>
 </section>

@@ -2,11 +2,11 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core'
 import { ContactService } from '../../services/async-contact.service'
 // import { ContactService } from '../../services/contact.service'
 import { Contact } from '../../models/contact.model'
-import { distinctUntilChanged, filter, map, Observable, switchMap, take } from 'rxjs'
+import { map, switchMap, take } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+// import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { nameTaken, nonEnglishLetters } from '../../customValidators/contact.validators'
+import { emailTaken, nameTaken, nonEnglishLetters } from '../../customValidators/contact.validators'
 
 @Component({
   selector: 'contact-edit-page',
@@ -14,7 +14,7 @@ import { nameTaken, nonEnglishLetters } from '../../customValidators/contact.val
   styleUrl: './contact-edit-page.component.scss'
 })
 export class ContactEditPageComponent implements OnInit {
-  private destroyRef = inject(DestroyRef)
+  // private destroyRef = inject(DestroyRef)
   private contactService = inject(ContactService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
@@ -22,26 +22,34 @@ export class ContactEditPageComponent implements OnInit {
   // this.contact = this.contactService.getEmptyContact() as Contact }
   form!: FormGroup
   contact: Contact | null = null
+  isEditMode: boolean = false
 
-  constructor() {
-    this.form = this.fb.group({
-      name: ['', [Validators.required, nonEnglishLetters], [nameTaken]], // initial value, validators, async validators
-      phone: ['', [Validators.required], []],
-      email: ['', [Validators.required], []]
+  // constructor() {
+  //   this.form = this.fb.group({
+  //     name: ['', [Validators.required, nonEnglishLetters], []], // initial value, validators, async validators
+  //     phone: ['', [Validators.required], []],
+  //     email: ['', [Validators.required], [emailTaken(this.contactService)]]
+  //   })
+  // }
+
+  ngOnInit(): void {
+    this.route.data.subscribe(({ contact }) => {
+      this.contact = contact
+      this.isEditMode = !!contact
+      this.initForm()
     })
   }
 
-  ngOnInit(): void {
-    //with resolver
-    this.route.data
-      .pipe(
-        filter(data => data['contact']),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe(({ contact }) => {
-        this.contact = contact
-        this.form.patchValue(contact)
-      })
+  initForm(): void {
+    this.form = this.fb.group({
+      name: ['', [Validators.required, nonEnglishLetters], [nameTaken]],
+      phone: ['', [Validators.required]],
+      email: ['', [Validators.required], this.isEditMode ? [] : [emailTaken(this.contactService)]]
+    })
+
+    if (this.isEditMode && this.contact) {
+      this.form.patchValue(this.contact)
+    }
   }
 
   async onSaveContact() {
