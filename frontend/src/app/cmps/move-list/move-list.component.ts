@@ -17,14 +17,18 @@ export class MoveListComponent {
   @Input() moves!: Move[]
   @Input() set contact(contact: Contact | null) {
     if (contact) {
-      this.title = 'Your moves to ' + contact.name.substring(0, contact.name.indexOf(' ') + 1)
-      this.home =''
+      const capitalizedName = this.capitalizeFirstLetter(contact.name);
+      this.title = 'Your moves to ' + capitalizedName.substring(0, capitalizedName.indexOf(' ') + 1);
+      this.home = '';
+    } else {
+      this.title = 'Last 3 moves';
+      this.home = 'home';
     }
-    else {
-      this.title = 'Last 3 moves'
-      this.home ='home'
-    }
-    this._contact = contact
+    this._contact = contact;
+  }
+  
+  capitalizeFirstLetter(name: string): string {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   }
 
   navToContact(id: string){
