@@ -19,10 +19,10 @@ export class MoveListComponent {
     if (contact) {
       const capitalizedName = this.capitalizeFirstLetter(contact.name);
       this.title = 'Your moves to ' + capitalizedName.substring(0, capitalizedName.indexOf(' ') + 1);
-      this.home = '';
+      this.home = ''
     } else {
-      this.title = 'Last 3 moves';
-      this.home = 'home';
+      this.title = 'Last 3 moves'
+      this.home = 'home'
     }
     this._contact = contact;
   }

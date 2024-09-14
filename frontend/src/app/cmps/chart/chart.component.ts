@@ -15,6 +15,7 @@ interface Trade {
 export class ChartComponent implements OnInit {
   width: number = 1000
   height: number = 400
+  showLegend: boolean = true
 
   trades$!: Observable<Trade>
   subscription!: Subscription
@@ -25,6 +26,8 @@ export class ChartComponent implements OnInit {
   onResize(event: any) {
     this.width = event.target.innerWidth * 0.9
     this.height = event.target.innerHeight * 0.5
+
+     this.showLegend = event.target.innerWidth >= 750;
   }
 
   ngOnInit() {
