@@ -29,6 +29,9 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 0.5em;
+        position: sticky;
+        top: 79px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 
         a {
             border-radius: 50%;
