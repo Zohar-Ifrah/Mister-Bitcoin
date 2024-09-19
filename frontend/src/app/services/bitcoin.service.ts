@@ -14,7 +14,7 @@ export class BitcoinService {
 
   getRate(coins: number) {
     //temp hard-coded
-    const rate = coins * 0.0000156532
+    const rate = coins * 0.00001726
     return of(rate).pipe(
       map(value => value.toString())
     )
