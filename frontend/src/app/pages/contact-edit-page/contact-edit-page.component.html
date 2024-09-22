@@ -26,7 +26,7 @@
         <input type="text" formControlName="email" id="email" />
         <ng-container *ngIf="form.controls['email']as emailInput">
             <p *ngIf="emailInput.touched && form.invalid" class="errors">
-                <span *ngIf="emailInput.errors?.['required']">> Email is required </span>
+                <span *ngIf="emailInput.errors?.['required']">Email is required </span>
                 <span *ngIf="emailInput.errors?.['emailTaken']">Email is already taken.</span>
             </p>
         </ng-container>

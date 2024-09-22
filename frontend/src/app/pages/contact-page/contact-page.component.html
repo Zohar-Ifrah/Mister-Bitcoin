@@ -1,5 +1,10 @@
 <section class="contact-page">
     <contact-filter />
-    <contact-list (onRemove)="onRemoveContact($event)" [contacts]="contacts$ | async" />
+    <ng-container *ngIf="(contacts$ | async)!.length > 0; else noContacts">
+        <contact-list (onRemove)="onRemoveContact($event)" [contacts]="contacts$ | async" />
+    </ng-container>
+    <ng-template #noContacts>
+        <p>No contacts to display.</p>
+    </ng-template>
 </section>
 <router-outlet />
