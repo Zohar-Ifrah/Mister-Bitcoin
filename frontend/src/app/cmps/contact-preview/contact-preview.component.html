@@ -11,9 +11,12 @@
                     </span>
                 </section>
                 <section class="edit-contact-btns">
-                    <a (click)="stopP($event)" routerLink="edit/{{contact._id}}" class="edit-link hide-btn">✏️</a>
-                    <button class="hide-btn" (click)="confirmAndRemove($event, contact._id)">
-                        <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725360519/exit.1613670bda75ad67062739301b4cf941_kfqhk9.svg"
+                    <a (click)="stopP($event)" routerLink="edit/{{contact._id}}" class="edit-link hide-btn">
+                        <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1727118251/edit_md6wcb.png"
+                            alt="✏️">
+                    </a>
+                    <button class="delete-btn hide-btn" (click)="confirmAndRemove($event, contact._id)">
+                        <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1727118244/delete_rcgktp.png"
                             alt="X">
                     </button>
                 </section>

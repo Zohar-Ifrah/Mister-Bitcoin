@@ -18,6 +18,11 @@
     width: 100%;
 }
 
+body {
+    background-color: #f4f2ee;
+    font-family: Arial, sans-serif;
+}
+
 body:has(.click-outside) {
 
     .click-outside,

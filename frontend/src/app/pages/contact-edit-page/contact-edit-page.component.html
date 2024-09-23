@@ -2,13 +2,15 @@
 
     <div class="back-container">
         <button (click)="onBack()">
-            <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1725359112/arrow-left-bold_veibjr_gyhloz.svg"
+            <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1727023195/arrow-left_iymohz.png"
                 alt="X">
         </button>
     </div>
-    <img src="" alt="">
+
     <h1>{{ contact?._id ? "Edit" : "Add" }} Contact</h1>
+
     <form [formGroup]="form" (ngSubmit)="onSaveContact()">
+
         <label for="name">Name</label>
         <input type="text" formControlName="name" id="name" />
         <ng-container *ngIf="form.controls['name']as nameInput">
@@ -34,7 +36,7 @@
         <label for="phone">Phone</label>
         <input type="text" formControlName="phone" id="phone" />
         <div class="save-btn-container">
-            <button [disabled]="form.pending || form.invalid" >Save</button>
+            <button [disabled]="form.pending || form.invalid">Save</button>
         </div>
     </form>
 </section>

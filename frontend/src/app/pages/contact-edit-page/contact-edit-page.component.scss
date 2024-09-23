@@ -38,12 +38,16 @@ label {
     left: 0.5em;
 
     button {
-        border-color: transparent;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 1.5em;
-        width: 1.4em;
         background-color: inherit;
+        border: none;
+    }
+
+    img {
+        width: 1.4em;
+        border-radius: 50%;
+        padding-block: 0.25em;
     }
 
     :hover {
