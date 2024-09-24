@@ -14,11 +14,11 @@ export class BitcoinService {
 
   getRate(coins: number) {
     //temp hard-coded
-    const rate = coins * 0.00001726
+    const rate = coins * 0.00001579
     return of(rate).pipe(
       map(value => value.toString())
     )
-    // return this.http.get<string>(`https://blockchain.info/tobtc?currency=USD&value=${coins}`)
+    return this.http.get<string>(`https://blockchain.info/tobtc?currency=USD&value=${coins}`)
   }
 
   getTradeVolume() {
