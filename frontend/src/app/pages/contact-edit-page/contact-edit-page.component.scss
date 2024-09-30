@@ -31,6 +31,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 70%;
+    gap: 0.1em;
 }
 
 label {
@@ -67,7 +68,7 @@ label {
     button {
         width: fit-content;
         border-radius: 15px;
-        margin-block-start: 2em;
+        margin-block-start: 1.5em;
         cursor: pointer;
         transition: transform 0.1s, box-shadow 0.2s;
         border: none;
@@ -106,9 +107,12 @@ label {
 }
 
 @media (max-width: 740px) {
-    .save-btn-container {
-        button {
-            margin-block-start: 1em;
-        }
+    .contact-edit{
+        z-index: 1;
     }
+    // .save-btn-container {
+    //     button {
+    //         margin-block-start: 1em;
+    //     }
+    // }
 }

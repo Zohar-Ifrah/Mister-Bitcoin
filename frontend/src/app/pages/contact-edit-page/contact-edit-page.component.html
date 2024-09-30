@@ -19,9 +19,9 @@
                 <span *ngIf="nameInput.errors?.['nonEnglishLetters']">Only English letters are allowed!</span>
                 <!-- <span *ngIf="nameInput.errors?.['nameTaken']">Name is already taken.</span> -->
             </p>
-            <span *ngIf="nameInput.pending && nameInput.touched && nameInput.dirty">
+            <!-- <span *ngIf="nameInput.pending && nameInput.touched && nameInput.dirty">
                 Fetching for data...
-            </span>
+            </span> -->
         </ng-container>
 
         <label for="email">Email</label>

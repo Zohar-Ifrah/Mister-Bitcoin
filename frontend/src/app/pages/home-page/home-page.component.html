@@ -6,7 +6,7 @@
       Coins:{{user.coins}}
     </p>
     <p> <img src="https://res.cloudinary.com/dqnsrtyxu/image/upload/v1724335670/bitcoin_s3wm76.png" alt="BTC">
-      BTC:{{BTC$ | async}}
+      BTC:{{(BTC$ | async) | number:'1.0-7'}}
     </p>
     <button (click)="onAddMoveDemo()">Add move - Demo</button>
     <button (click)="onAddCoinsDemo(user)">+100 Coins</button>
